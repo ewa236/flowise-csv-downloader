@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Download CSV from Flowise Agent</title>
+</head>
+<body style="font-family: sans-serif; padding: 2em;">
+
+  <h2>📄 Flowise CSV Export</h2>
+  <p>Wklej dane CSV od agenta poniżej, a potem kliknij „Pobierz CSV” 👇</p>
+
+  <textarea id="csvData" placeholder="Wklej tutaj CSV..." style="width:100%; height:150px;"></textarea>
+  <br><br>
+  <button onclick="downloadCSV()" style="padding: 0.5em 1em; font-size: 1em;">📥 Pobierz CSV</button>
+
+  <script>
+    function downloadCSV() {
+      const csvContent = document.getElementById("csvData").value.trim();
+      if (!csvContent) {
+        alert("Wklej dane CSV przed pobraniem!");
+        return;
+      }
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+      link.setAttribute("href", URL.createObjectURL(blob));
+      link.setAttribute("download", "flowise_output.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+
+</body>
+</html>
